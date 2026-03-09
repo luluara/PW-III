@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>
+  Responsivo 
+</title>
+<style>
+* {
+  box-sizing: border-box; 
+}
+
+.row::after { 
+  content: ""; 
+  clear: both; 
+  display: table; 
+}
+
+[class*="col-"] 
+ { 
+  float: left;
+  padding: 15px;
+}
+
+html {
+  font-family: Tahoma, sans-serif;
+	background:rgb(255, 102, 186);}
+
+header {
+  background-color: rgb(143, 80, 132);
+  color: #fff;
+  padding: 10px;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  padding: 8px;
+  margin-bottom: 16px;
+  background-color: rgb(143, 80, 132);
+  color: #ffffff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.9), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+li:hover {
+  background-color: rgb(163, 20, 99);;
+  box-shadow: 10px 6px rgb(182, 67, 115);;
+  position: relative; 
+  top: 7px; left: 19px;
+  }
+
+.classeE {
+  background-color: rgb(172, 20, 121);
+  padding: 140px;
+  color: #ffffff;
+  text-align: left;
+  font-size: 14px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+footer {
+  background-color: rgb(172, 20, 121);
+  color: #ffffff;
+  position:relative;
+  width:100%;
+  text-align: center;
+  font-size: 15px;
+  padding: 15px;
+}
+
+
+
+[class*="col-"] {
+  width: 100%;
+}
+
+@media only screen and (min-width: 600px) {
+
+  .col-s-1 {width: 8.33%;}
+  .col-s-2 {width: 16.66%;}
+  .col-s-3 {width: 25%;}
+  .col-s-4 {width: 33.33%;}
+  .col-s-5 {width: 41.66%;}
+  .col-s-6 {width: 50%;}
+  .col-s-7 {width: 58.33%;}
+  .col-s-8 {width: 66.66%;}
+  .col-s-9 {width: 75%;}
+  .col-s-10 {width: 83.33%;}
+  .col-s-11 {width: 91.66%;}
+  .col-s-12 {width: 100%;}
+}
+@media only screen and (min-width: 768px) {
+
+  .col-1 {width: 8.33%;}
+  .col-2 {width: 16.66%;}
+  .col-3 {width: 25%;}
+  .col-4 {width: 33.33%;}
+  .col-5 {width: 41.66%;}
+  .col-6 {width: 50%;}
+  .col-7 {width: 58.33%;}
+  .col-8 {width: 66.66%;}
+  .col-9 {width: 75%;}
+  .col-10 {width: 83.33%;}
+  .col-11 {width: 91.66%;}
+  .col-12 {width: 100%;}
+}
+img {height:150px;
+	width:280px;}
+
+</style>
+</head>
+<body>
+
+<header>
+    <h1>Paisagens do Brasil</h1>
+</header>
+
+<div class="row">
+  <div class="col-3 col-s-3">
+    <ul>
+     <li><a href="arraial.jpg"> <img src="arraial.jpg" alt="Arraial do cabo"></a></li>
+     <li><a href="porto.webp"><img src="porto.webp" alt="Porto de Galinhas"></a></li>
+	 <li><a href="fn1.jpg"><img src="fn1.jpg" alt="Fernando de Noronha"></a></li>
+     <li><a href="rio de janeiro.jpg"><img src="rio de janeiro.jpg" alt="Rio de Janeiro"></a></li>
+     <li><a href="ES.jpg"><img src="ES.jpg" alt="Praia de Bacutia"></a></li>
+    </ul>
+  </div>
+
+  <div class="col-6 col-s-9">
+    <br> <br> <h3>1° Arraial do Cabo</h3>
+    <br> <br> <br> <br> <br> <br> <br> <h3>2° Porto de Galinhas</h3>
+    <br> <br> <br> <br> <br> <br> <br> <h3>3° Fernando de Noronha</h3>
+    <br> <br> <br> <br> <br> <br> <br> <h3>4° Rio de Janeiro</h3>
+    <br> <br> <br> <br> <br> <br> <h3>5° Praia de Bacutia</h3>
+  </div>
+
+  <div class="col-3 col-s-12">
+    <div class="classeE">
+        <h1> Onde ficam localizadas</h1> <br> <br> 
+      <h2>1° Rio de Janeiro</h2> <br>
+      <h2>2° Pernambuco</h2> <br>
+      <h2>3° Pernambuco</h2> <br>
+      <h2>4° Rio de Janeiro </h2> <br>
+      <h2>5° Espírito Santo</h2> <br>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>-> Alguma das melhores paisagens do Brasil</p>
+</footer>
+
+</body>
+</html>

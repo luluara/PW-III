@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MEI</title>
+</head>
+<style>
+    body {
+        background-color: antiquewhite;
+    }
+</style>
+<body>
+    <h1> Preencha o formulário abaixo </h1>
+    <form action="" method="post">
+        <fieldset width="700">
+            <font color="red">
+                <legend> Dados pessoais: </legend> <br>
+            </font>
+        
+        <!-- Cor no texto e placeholder = texto explicativo do campo -->
+<font color="black">
+    nome:
+    </font>
+     <input type="text" name="nome" size="40" placeholder="digite seu nome"> <p>
+    
+     <!-- label ajuda no preenchimento, um clique leva ao campo -->
+    <label>
+    e-mail: <input type="text" name="e-mail" size="50" placeholder="digite seu e-mail">
+    </label> <p>
+    <label>
+    senha: <input type="password" name="senha" maxlength="5" size="5">
+    </label><p>
+
+        <font color="red">
+            <legend>Produtos:</legend>
+        </font>
+    
+    Sapatos:<br><input type="radio" name="masc" value="Masc">
+     masculino<br>
+    <input type="radio" name="sexo" value="Fem">
+     feminino<br><br>
+    
+    <font color="red">
+    Sapatos disponíveis:<br>
+    </font>
+    <input type="checkbox" name="ter" value="A"> Tênis de esporte<br>
+    <input type="checkbox" name="ter" value="B"> Tênis casual <br>
+    <input type="checkbox" name="ter" value="C"> Salto <br>
+    <input type="checkbox" name="ter" value="D"> sandália<br>
+    <input type="checkbox" name="ter" value="E"> Rasteirinha<br>
+    <input type="checkbox" name="ter" value="F"> Bota<br><br>
+            
+    <font color="red">
+    Qual número vc usa?<br>
+    <select name="número">
+    <option> 33/34 </option>
+    <option> 35/36 </option>
+    <option> 37/38 </option>
+    <option> 39/40 </option>
+    </font>
+    </select><p>
+    
+    Observações sobre o produto:<br>
+    <textarea name="obs" cols="60" rows="10"> Digitar suas observações</textarea>
+    <p>
+    
+    <input type="submit" value="enviar">
+    <input type="reset" value="limpar">
+    
+    </fieldset>
+    
+
+    </form>
+    
+</body>
+</html>
