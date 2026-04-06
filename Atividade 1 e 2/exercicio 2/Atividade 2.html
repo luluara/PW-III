@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head> 
+<meta charset="UTF-8"> 
+<title>Exercício Prático II</title> 
+<link rel="stylesheet" href="css2.css"> 
+</head> 
+
+<body> 
+
+<div align = center> 
+<h2>Controle de Vendas</h2> 
+<br><br> 
+
+<table> 
+    <tr> >
+        <th>Selecionar</th> 
+        <th>Produto</th> 
+        <th>Preço</th>
+        <th>Quantidade</th> 
+    </tr>
+
+    <tr>
+        <td><input type="checkbox" class="produto" data-preco="19.90"></td> 
+        <td>Camiseta Regata</td>
+        <td>19,90</td> 
+        <td><input type="number" min="0" value="0"></td>
+    </tr>
+
+    <tr>
+        <td><input type="checkbox" class="produto" data-preco="59.90"></td> 
+        <td>Camisa Social</td>
+        <td>59,90</td>
+        <td><input type="number" min="0" value="0"></td>
+    </tr>
+
+    <tr>
+        <td><input type="checkbox" class="produto" data-preco="119.90"></td> 
+        <td>Blusa</td>
+        <td>119,90</td>
+        <td><input type="number" min="0" value="0"></td>
+    </tr>
+
+    <tr>
+        <td><input type="checkbox" class="produto" data-preco="39.90"></td> 
+        <td>Pullover</td>
+        <td>39,90</td>
+        <td><input type="number" min="0" value="0"></td>
+    </tr>
+
+    <tr>
+        <td><input type="checkbox" class="produto" data-preco="99.90"></td> 
+        <td>Sapato</td>
+        <td>99,90</td>
+        <td><input type="number" min="0" value="0"></td>
+    </tr>
+
+    <tr>
+        <td><input type="checkbox" class="produto" data-preco="38.90"></td> 
+        <td>Calça</td>
+        <td>38,90</td>
+        <td><input type="number" min="0" value="0"></td>
+    </tr>
+
+    <tr>
+        <td><input type="checkbox" class="produto" data-preco="9.90"></td> 
+        <td>Meias</td>
+        <td>9,90</td>
+        <td><input type="number" min="0" value="0"></td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" class="produto" data-preco="24.90"></td> 
+        <td>Luvas</td>
+        <td>24,90</td>
+        <td><input type="number" min="0" value="0"></td>
+    </tr>
+
+    <tr>
+        <td><input type="checkbox" class="produto" data-preco="329.90"></td> 
+        <td>Jaqueta</td>
+        <td>329,90</td>
+        <td><input type="number" min="0" value="0"></td>
+    </tr>
+
+    <tr>
+        <td><input type="checkbox" class="produto" data-preco="68.90"></td> 
+        <td>Bermuda</td>
+        <td>68,90</td>
+        <td><input type="number" min="0" value="0"></td>
+    </tr>
+
+    <tr>
+        <td><input type="checkbox" class="produto" data-preco="14.90"></td> 
+        <td>Chinelo</td>
+        <td>14,90</td>
+        <td><input type="number" min="0" value="0"></td>
+    </tr>
+
+    <tr>
+        <td><input type="checkbox" class="produto" data-preco="6.90"></td> 
+        <td>Boné</td>
+        <td>6,90</td>
+        <td><input type="number" min="0" value="0"></td>
+    </tr>
+
+
+
+</table> 
+
+<br><br> 
+<h3>Forma de Pagamento</h3> 
+<br> 
+
+<label> 
+    <input type="radio" name="pagamento" value="vista" checked onclick="toggleParcelas()"> <!-- opção de pagamento a vista -->
+    À Vista
+</label>
+
+<label>
+    <input type="radio" name="pagamento" value="prazo" onclick="toggleParcelas()"> <!-- opção de pagamento a prazo -->
+    A Prazo
+</label>
+
+<br><br>
+
+Quantidade de Parcelas: 
+<select id="parcelas" disabled>
+    <!-- Opção parcelas --> 
+    <option value="2">2</option> 
+    <option value="3">3</option> 
+    <option value="4">4</option> 
+    <option value="5">5</option> 
+</select>
+
+<br><br>
+
+<button onclick="calcular()">Calcular</button> 
+
+<div class="resultado" id="resultado"></div> 
+
+<script> 
+
+function toggleParcelas() { 
+    const prazo = document.querySelector('input[value="prazo"]').checked; 
+    document.getElementById("parcelas").disabled = !prazo; // Habilita ou desabilita o select
+}
+
+function calcular() { // Função de cálculo
+
+    let total = 0; // Variável p total
+
+    const linhas = document.querySelectorAll("table tr"); 
+
+    linhas.forEach((linha, index) => { 
+        if (index === 0) return; 
+
+        const checkbox = linha.querySelector(".produto");
+        const quantidade = linha.querySelector("input[type='number']").value; 
+
+        if (checkbox.checked) { 
+            const preco = parseFloat(checkbox.dataset.preco); // converte preço para número
+            total += preco * quantidade; 
+        }
+    });
+
+    if (total === 0) { // nenhum produto foi escolhido
+        document.getElementById("resultado").innerHTML = "Selecione algum produto."; 
+        return; 
+    }
+
+    const pagamento = document.querySelector('input[name="pagamento"]:checked').value; 
+    let resultadoTexto = ""; 
+
+    if (pagamento === "vista") { 
+        let desconto = total * 0.085; //desconto
+        let totalFinal = total - desconto; 
+
+        resultadoTexto = `
+            Total: R$ ${total.toFixed(2)} <br>
+            Desconto: R$ ${desconto.toFixed(2)} <br>
+            Total à vista: R$ ${totalFinal.toFixed(2)}
+        `; 
+    } else { // pagamento a prazo
+
+        let parcelas = parseInt(document.getElementById("parcelas").value);
+
+        let totalComJuros = total + (total * 0.06) + (parcelas * 6.90); // juros 
+        let valorParcela = totalComJuros / parcelas;
+
+        if (valorParcela < 10) { 
+            document.getElementById("resultado").innerHTML =
+                "Erro: parcela não pode ser menor que R$ 10,00."; // se valor menor que 10
+            return; // Interrompe execução
+        }
+
+        resultadoTexto = `
+            Total: R$ ${total.toFixed(2)} <br>
+            Total com juros: R$ ${totalComJuros.toFixed(2)} <br>
+            Parcelas: ${parcelas}x de R$ ${valorParcela.toFixed(2)}
+        `; // Monta resultado final
+    }
+
+    document.getElementById("resultado").innerHTML = resultadoTexto; 
+}
+
+</script> 
+
+</div> 
+
+</body> 
+</html>

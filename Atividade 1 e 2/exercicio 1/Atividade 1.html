@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Exercício Prático I</title>
+  <link rel="stylesheet" href="css.css">
+</head>
+<body>
+
+    <div align = center>
+        <br>
+  <h1>Calculadora</h1>
+  <br>
+  </div>
+
+  <h2>Cálculos com um número</h2>
+  <input type="number" id="numero" placeholder="Digite um número">
+  <button onclick="calcular()">Calcular</button>
+
+
+  <div class="resultado" id="resultado1"></div>
+<br><br>
+  <h2>Média de 4 números</h2>
+  <input type="number" id="n1">
+  <input type="number" id="n2">
+  <input type="number" id="n3">
+  <input type="number" id="n4">
+  <button onclick="media()">Calcular</button>
+
+  <div class="resultado" id="resultado2"></div>
+<br><br>
+  <h2>Bhaskara</h2>
+  <input type="number" id="a" placeholder="a">
+  <input type="number" id="b" placeholder="b">
+  <input type="number" id="c" placeholder="c">
+  <button onclick="bhaskara()">Calcular</button>
+
+  <div class="resultado" id="resultado3"></div>
+
+  <script>
+    function calcular() {
+      let n = Number(document.getElementById("numero").value);
+
+      let resultado = `
+        Dobro: ${n * 2} <br>
+        Triplo: ${n * 3} <br>
+        Quádruplo: ${n * 4} <br>
+        Quíntuplo: ${n * 5} <br>
+        Séxtuplo: ${n * 6} <br>
+        Quadrado: ${n ** 2} <br>
+        Cubo: ${n ** 3} <br>
+        4ª potência: ${n ** 4} <br>
+        5ª potência: ${n ** 5} <br>
+        6ª potência: ${n ** 6} <br>
+        Par ou Ímpar: ${n % 2 === 0 ? "Par" : "Ímpar"}
+      `;
+
+      document.getElementById("resultado1").innerHTML = resultado;
+    }
+
+    function media() {
+      let n1 = Number(document.getElementById("n1").value);
+      let n2 = Number(document.getElementById("n2").value);
+      let n3 = Number(document.getElementById("n3").value);
+      let n4 = Number(document.getElementById("n4").value);
+
+      let m = (n1 + n2 + n3 + n4) / 4;
+
+      document.getElementById("resultado2").innerHTML =
+        "Média: " + m;
+    }
+
+    function bhaskara() {
+      let a = Number(document.getElementById("a").value);
+      let b = Number(document.getElementById("b").value);
+      let c = Number(document.getElementById("c").value);
+
+      let delta = b * b - 4 * a * c; // let usado para criar variável no js 
+
+      if (delta < 0) {
+        document.getElementById("resultado3").innerHTML =
+          "Não existem raízes reais";
+      } else {
+        let x1 = (-b + Math.sqrt(delta)) / (2 * a);
+        let x2 = (-b - Math.sqrt(delta)) / (2 * a);
+
+        document.getElementById("resultado3").innerHTML =
+          `x1 = ${x1} <br> x2 = ${x2}`;
+      }
+    }
+  </script>
+
+</body>
+</html>
