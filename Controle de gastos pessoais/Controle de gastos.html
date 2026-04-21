@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Controle de Gastos</title>
+  <link rel="stylesheet" href="styleGastos.css">
+</head>
+<body>
+
+<br><br><br>
+<div class="container">
+<h1>Controle de Gastos</h1>
+
+<!-- INPUTS -->
+<input id="desc" placeholder="Descrição">
+<input id="valor" type="number" placeholder="Valor">
+
+<select id="cat">
+  <option>Alimentação</option>
+  <option>Transporte</option>
+  <option>Lazer</option>
+</select>
+
+<button onclick="add()">Adicionar</button>
+
+
+<!-- TOTAL -->
+<h2>Total: R$ <span id="total">0</span></h2>
+
+
+<select id="filtro" onchange="mostrar()">
+  <option>Todos</option>
+  <option>Alimentação</option>
+  <option>Transporte</option>
+  <option>Lazer</option>
+</select>
+
+<!-- LISTA -->
+<ul id="lista"></ul>
+</div>
+
+<script>
+let gastos = JSON.parse(localStorage.getItem("g")) || [];
+
+// salvar no navegador
+function salvar() {
+  localStorage.setItem("g", JSON.stringify(gastos));
+}
+
+// adicionar gasto
+function add() {
+  let d = desc.value;
+  let v = +valor.value; // sinal de + que transforma o valor de texto em número
+  let c = cat.value;
+
+  if (!d || v <= 0) {
+    alert("Preencha todos os campos!");
+    return;
+  }
+
+  gastos.push({ d, v, c });
+
+  desc.value = "";
+  valor.value = "";
+
+  salvar();
+  mostrar();
+}
+
+// remover gasto
+function remover(i) {
+  gastos.splice(i, 1);
+  salvar();
+  mostrar();
+}
+
+// mostrar lista + total
+function mostrar() {
+  lista.innerHTML = "";
+
+  let f = filtro.value;
+
+  gastos.forEach((g, i) => {
+    if (f != "Todos" && g.c != f) return;
+
+    lista.innerHTML += `
+      <li>
+        ${g.d} - R$ ${g.v} (${g.c})
+        <button onclick="remover(${i})">Remover</button>
+      </li>
+    `;
+  });
+
+  let total = gastos.reduce((s, g) => s + g.v, 0);
+  totalEl.innerText = total.toFixed(2);
+}
+
+// corrigindo referência do total
+const totalEl = document.getElementById("total");
+
+// carregar ao abrir
+mostrar();
+</script>
+
+</body>
+</html>
