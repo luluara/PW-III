@@ -1,0 +1,135 @@
+/* Fundo geral */
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #ffe6f0, #fff5fb);
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+/* Título */
+h1 {
+  text-align: center;
+  color: #d63384;
+  margin-top: 25px;
+  font-weight: bold;
+}
+
+/* Container principal */
+.container {
+  width: 90%;
+  max-width: 1000px;
+  margin: 30px auto;
+  background: rgba(255, 255, 255, 0.43);
+  padding: 25px;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(214, 51, 132, 0.15);
+  border: 1px solid #ffd1e6;
+}
+
+/* Botões base */
+button {
+  background-color: #ff4da6;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  margin: 5px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.25s ease;
+  font-weight: bold;
+}
+
+button:hover {
+  background-color: #e60073;
+  transform: scale(1.05);
+}
+
+/* Botão editar */
+button.edit {
+  background-color: #ff85c1;
+}
+
+button.edit:hover {
+  background-color: #ff5aa5;
+}
+
+/* Botão deletar */
+button.delete {
+  background-color: #ff3366;
+}
+
+button.delete:hover {
+  background-color: #cc0044;
+}
+
+/* Tabela */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+/* Cabeçalho tabela */
+table th {
+  background: #ffb3d9;
+  color: #7a003c;
+  padding: 12px;
+  text-align: left;
+}
+
+/* Linhas */
+table td {
+  padding: 12px;
+  border-bottom: 1px solid #f3d6e6;
+}
+
+table tr:hover {
+  background-color: #fff0f6;
+}
+
+/* Inputs */
+input, select {
+  padding: 10px;
+  margin: 6px 0;
+  width: 100%;
+  border: 1px solid #ffb3d9;
+  border-radius: 10px;
+  outline: none;
+  transition: 0.2s;
+}
+
+input:focus, select:focus {
+  border-color: #ff4da6;
+  box-shadow: 0 0 6px rgba(255, 77, 166, 0.3);
+}
+
+/* Form */
+form {
+  margin-top: 15px;
+}
+
+/* Cards */
+.card {
+  background: rgba(255, 255, 255, 0.558);
+  padding: 15px;
+  margin: 10px 0;
+  border-radius: 14px;
+  box-shadow: 0 4px 15px rgba(255, 77, 166, 0.1);
+  border: 1px solid #ffe0ef;
+}
+
+.menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  background: #fff0f6;
+  padding: 15px;
+  border-radius: 12px;
+  width: fit-content;
+  margin: 20px auto;
+  box-shadow: 0 4px 10px rgba(255, 77, 166, 0.2);
+}
