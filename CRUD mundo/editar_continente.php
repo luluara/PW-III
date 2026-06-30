@@ -15,7 +15,7 @@ $dados = mysqli_fetch_assoc($resultado);
     <meta charset="UTF-8">
     <title>Editar Continente</title>
 
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -28,11 +28,14 @@ $dados = mysqli_fetch_assoc($resultado);
 
 <nav>
 
-<a href="index.php">Início</a>
-<a href="continentes.php">Continentes</a>
-<a href="paises.php">Países</a>
-<a href="cidades.php">Cidades</a>
-<a href="governantes.php">Governantes</a>
+<div class="menu">
+  <a href="index.html">Início</a>
+  <a href="continentes.php">Continentes</a>
+  <a href="paises.php">Países</a>
+  <a href="cidades.php">Cidades</a>
+  <a href="governantes.php">Governantes</a>
+</div> 
+
 
 </nav>
 

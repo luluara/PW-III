@@ -56,6 +56,19 @@ header("Location: governantes.php");
 
 </header>
 
+<nav>
+
+<div class="menu">
+  <a href="index.html">Início</a>
+  <a href="continentes.php">Continentes</a>
+  <a href="paises.php">Países</a>
+  <a href="cidades.php">Cidades</a>
+  <a href="governantes.php">Governantes</a>
+</div> 
+
+
+</nav>
+
 <div class="container">
 
 <div class="card">

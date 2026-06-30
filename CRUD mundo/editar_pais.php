@@ -45,7 +45,7 @@ if(isset($_POST['editar'])){
 <meta charset="UTF-8">
 <title>Editar País</title>
 
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="style.css">
 
 </head>
 
@@ -57,11 +57,14 @@ if(isset($_POST['editar'])){
 
 <nav>
 
-<a href="index.html">Início</a>
-<a href="continentes.php">Continentes</a>
-<a href="paises.php">Países</a>
-<a href="cidades.php">Cidades</a>
-<a href="governantes.php">Governantes</a>
+<div class="menu">
+  <a href="index.html">Início</a>
+  <a href="continentes.php">Continentes</a>
+  <a href="paises.php">Países</a>
+  <a href="cidades.php">Cidades</a>
+  <a href="governantes.php">Governantes</a>
+</div> 
+
 
 </nav>
 
