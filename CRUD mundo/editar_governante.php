@@ -44,7 +44,7 @@ header("Location: governantes.php");
 <meta charset="UTF-8">
 <title>Editar Governante</title>
 
-<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="style.css">
 
 </head>
 
