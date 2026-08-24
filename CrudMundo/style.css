@@ -1,0 +1,711 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+
+    font-family: "Poppins", sans-serif;
+
+    color: #173b56;
+
+    background:
+        radial-gradient(
+            circle at 10% 10%,
+            rgba(74, 168, 230, 0.18),
+            transparent 28%
+        ),
+        linear-gradient(
+            135deg,
+            #e8f5ff,
+            #f7fbff
+        );
+
+    background-attachment: fixed;
+}
+
+/* ========================================
+   TOPO
+======================================== */
+
+body::before {
+    content: "";
+
+    display: block;
+
+    height: 5px;
+
+    background: linear-gradient(
+        90deg,
+        #064b70,
+        #0879b9,
+        #49b5ee
+    );
+}
+
+
+/* ========================================
+   HEADER
+======================================== */
+
+header {
+    padding: 28px 20px 20px;
+
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+
+    color: #075985;
+
+    font-size: 36px;
+
+    font-weight: 800;
+
+    letter-spacing: -1px;
+}
+
+header h1::before {
+    content: "🌎 ";
+}
+
+header h1::after {
+    content: " ✈️";
+}
+
+
+/* ========================================
+   MENU
+======================================== */
+
+nav {
+    width: 100%;
+
+    padding: 0 20px;
+}
+
+.menu {
+    width: 100%;
+    max-width: 1100px;
+
+    min-height: 62px;
+
+    margin: 0 auto 35px;
+
+    padding: 6px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 5px;
+
+    background: #ffffff;
+
+    border: 1px solid #d5e7f3;
+
+    border-radius: 13px;
+
+    box-shadow:
+        0 7px 22px rgba(20, 78, 112, 0.10);
+}
+
+
+/* Links */
+
+.menu a {
+    flex: 1;
+
+    max-width: 230px;
+
+    height: 48px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    color: #557386;
+
+    text-decoration: none;
+
+    border-radius: 9px;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    transition: 0.2s ease;
+}
+
+.menu a:hover {
+    color: #075985;
+
+    background: #edf7fd;
+}
+
+
+/* Página atual */
+
+.menu a.active {
+    color: #ffffff;
+
+    background: #0879b9;
+
+    box-shadow:
+        0 4px 12px rgba(8, 121, 185, 0.22);
+}
+
+
+/* ========================================
+   CONTAINER DAS PÁGINAS
+======================================== */
+
+.container {
+    width: 92%;
+    max-width: 1100px;
+
+    margin: 0 auto 50px;
+
+    padding: 28px;
+
+    background: #ffffff;
+
+    border: 1px solid #d6e7f2;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 8px 25px rgba(19, 73, 105, 0.08);
+}
+
+
+/* ========================================
+   TÍTULOS DAS PÁGINAS
+======================================== */
+
+.container h2 {
+    margin-top: 0;
+
+    padding-bottom: 15px;
+
+    color: #075985;
+
+    font-size: 25px;
+
+    border-bottom: 2px solid #e4f0f7;
+}
+
+.container h2::before {
+    margin-right: 8px;
+}
+
+
+/* ========================================
+   TABELA
+======================================== */
+
+table {
+    width: 100%;
+
+    margin-top: 20px;
+
+    border-collapse: separate;
+
+    border-spacing: 0;
+
+    overflow: hidden;
+
+    background: #ffffff;
+
+    border: 1px solid #d7e7f1;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 4px 15px rgba(20, 75, 105, 0.06);
+}
+
+table th {
+    padding: 14px 16px;
+
+    text-align: left;
+
+    color: #ffffff;
+
+    background: #075985;
+
+    font-size: 13px;
+
+    font-weight: 700;
+}
+
+table td {
+    padding: 14px 16px;
+
+    color: #405b6b;
+
+    border-bottom: 1px solid #e6eef3;
+
+    font-size: 14px;
+}
+
+table tbody tr {
+    transition: background 0.15s ease;
+}
+
+table tbody tr:hover {
+    background: #eef8ff;
+}
+
+table tr:last-child td {
+    border-bottom: none;
+}
+
+
+/* ========================================
+   BOTÕES
+======================================== */
+
+button {
+    padding: 9px 15px;
+
+    margin: 3px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: #0879b9;
+
+    color: #ffffff;
+
+    font-family: "Poppins", sans-serif;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+button:hover {
+    background: #075985;
+
+    transform: translateY(-1px);
+}
+
+
+/* EDITAR */
+
+button.edit {
+    background: #fff4cf;
+
+    color: #8a6500;
+
+    border: 1px solid #efd77f;
+}
+
+button.edit:hover {
+    background: #ffe9a3;
+
+    color: #6e5100;
+}
+
+
+/* DELETAR */
+
+button.delete {
+    background: #fff0f1;
+
+    color: #ad303b;
+
+    border: 1px solid #edb6ba;
+}
+
+button.delete:hover {
+    background: #ffe0e2;
+
+    color: #8f202a;
+}
+
+
+/* ========================================
+   FORMULÁRIOS
+======================================== */
+
+form {
+    margin-top: 20px;
+
+    padding: 22px;
+
+    background: #f5faff;
+
+    border: 1px solid #d8e9f4;
+
+    border-radius: 12px;
+}
+
+form h2 {
+    border: none;
+
+    padding: 0;
+}
+
+
+/* ========================================
+   INPUTS
+======================================== */
+
+input,
+select {
+    width: 100%;
+
+    padding: 11px 13px;
+
+    margin: 6px 0 12px;
+
+    background: #ffffff;
+
+    border: 1px solid #cbdde9;
+
+    border-radius: 8px;
+
+    outline: none;
+
+    font-family: "Poppins", sans-serif;
+
+    color: #294c62;
+
+    transition: 0.2s ease;
+}
+
+input:focus,
+select:focus {
+    border-color: #168bd0;
+
+    box-shadow:
+        0 0 0 3px rgba(22, 139, 208, 0.12);
+}
+
+
+/* ========================================
+   CARDS
+======================================== */
+
+.card {
+    padding: 20px;
+
+    margin: 15px 0;
+
+    background: #ffffff;
+
+    border: 1px solid #d8e8f2;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 4px 14px rgba(20, 75, 105, 0.06);
+}
+
+.card:hover {
+    border-color: #b8d9ed;
+
+    box-shadow:
+        0 7px 20px rgba(20, 75, 105, 0.10);
+}
+
+
+/* ========================================
+   BADGES
+======================================== */
+
+.badge {
+    display: inline-block;
+
+    padding: 5px 10px;
+
+    color: #075985;
+
+    background: #e7f5ff;
+
+    border: 1px solid #c3e2f5;
+
+    border-radius: 20px;
+
+    font-size: 12px;
+
+    font-weight: 600;
+}
+
+
+/* ========================================
+   RESPONSIVO
+======================================== */
+
+@media (max-width: 700px) {
+
+    header h1 {
+        font-size: 28px;
+    }
+
+    nav {
+        padding: 0 10px;
+    }
+
+    .menu {
+        overflow-x: auto;
+
+        justify-content: flex-start;
+    }
+
+    .menu a {
+        flex: 0 0 auto;
+
+        min-width: 130px;
+    }
+
+    .container {
+        width: 96%;
+
+        padding: 18px;
+    }
+
+    table {
+        display: block;
+
+        overflow-x: auto;
+
+        white-space: nowrap;
+    }
+}
+
+/* ========================================
+   🏠 HOME
+======================================== */
+
+.home {
+    width: 92%;
+    max-width: 1100px;
+
+    margin: 30px auto 50px;
+}
+
+
+/* ========================================
+   🌎 HERO DA HOME
+======================================== */
+
+.hero {
+    position: relative;
+
+    min-height: 330px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    overflow: hidden;
+
+    padding: 45px 55px;
+
+    border-radius: 20px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #075985 0%,
+            #0879b9 55%,
+            #159bd7 100%
+        );
+
+    box-shadow:
+        0 15px 35px rgba(7, 89, 133, 0.20);
+}
+
+
+/* círculos decorativos */
+
+.hero::before {
+    content: "";
+
+    position: absolute;
+
+    width: 330px;
+    height: 330px;
+
+    right: 100px;
+    top: -180px;
+
+    background: rgba(255,255,255,0.07);
+
+    border-radius: 50%;
+}
+
+
+.hero::after {
+    content: "";
+
+    position: absolute;
+
+    width: 280px;
+    height: 280px;
+
+    right: -100px;
+    bottom: -170px;
+
+    background: rgba(255,255,255,0.08);
+
+    border-radius: 50%;
+}
+
+
+/* ========================================
+   TEXTO
+======================================== */
+
+.hero-text {
+    position: relative;
+
+    z-index: 2;
+
+    max-width: 600px;
+}
+
+
+.tag {
+    display: inline-block;
+
+    margin-bottom: 15px;
+
+    padding: 7px 13px;
+
+    color: #e5f7ff;
+
+    background: rgba(255,255,255,0.13);
+
+    border: 1px solid rgba(255,255,255,0.20);
+
+    border-radius: 20px;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    letter-spacing: 0.4px;
+}
+
+
+.hero h2 {
+    margin: 0;
+
+    color: white;
+
+    font-size: 38px;
+
+    line-height: 1.2;
+
+    font-weight: 500;
+}
+
+
+.hero h2 strong {
+    font-weight: 800;
+}
+
+
+.hero p {
+    margin: 18px 0 0;
+
+    max-width: 550px;
+
+    color: #d9f1ff;
+
+    font-size: 15px;
+
+    line-height: 1.7;
+}
+
+
+/* ========================================
+   🌎 GLOBO
+======================================== */
+
+.hero-globe {
+    position: relative;
+
+    z-index: 2;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 190px;
+    height: 190px;
+
+    flex-shrink: 0;
+
+    font-size: 115px;
+
+    background: rgba(255,255,255,0.10);
+
+    border: 1px solid rgba(255,255,255,0.18);
+
+    border-radius: 50%;
+
+    box-shadow:
+        0 15px 35px rgba(0,0,0,0.10);
+}
+
+
+/* ========================================
+   📱 CELULAR
+======================================== */
+
+@media (max-width: 700px) {
+
+    .home {
+        width: 96%;
+    }
+
+    .hero {
+        min-height: 300px;
+
+        padding: 35px 25px;
+
+        text-align: center;
+
+        justify-content: center;
+    }
+
+    .hero-text {
+        max-width: 100%;
+    }
+
+    .hero h2 {
+        font-size: 28px;
+    }
+
+    .hero p {
+        font-size: 14px;
+    }
+
+    .hero-globe {
+        display: none;
+    }
+}
