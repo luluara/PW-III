@@ -576,3 +576,5 @@ WHERE username = 'admin@email.com';
 UPDATE tb_usuario 
 SET status = 'A', qtd_acesso = 1 
 WHERE username = 'user@email.com';
+
+UPDATE tb_usuario SET qtd_acesso = 0 WHERE username = 'admin@email.com';

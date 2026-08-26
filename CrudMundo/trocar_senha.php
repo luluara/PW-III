@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $log->execute(["Troca de senha inicial realizada", $username]);
 
         unset($_SESSION['troca_obrigatoria']);
-        header("Location: index.html");
+        header("Location: index.php");
         exit;
     }
 }

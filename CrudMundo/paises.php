@@ -1,54 +1,48 @@
 <?php
-include("conexao.php");
-?>
+session_start();
 
+// 1. Impede acesso sem login
+if (!isset($_SESSION['usuario'])) {
+    header("Location: login.php");
+    exit;
+}
+
+// 2. Impede o uso sem redefinir a senha no primeiro acesso
+if (isset($_SESSION['troca_obrigatoria']) || (isset($_SESSION['usuario']['qtd_acesso']) && $_SESSION['usuario']['qtd_acesso'] == 0)) {
+    header("Location: trocar_senha.php");
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
-    <title>Países</title>
-
+    <title>Sistema Mundo</title>
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<header>
-    <h1>Sistema Mundo 🌎</h1>
+<header class="header">
+    <div>
+        <h1>Sistema Mundo</h1>
+        <p>Explore o mundo, um país de cada vez</p>
+    </div>
 </header>
 
 <nav class="navbar">
-
     <div class="menu">
-        
-        <a href="index.html">
-            <span>🏠</span>
-            Home
-        </a>
+        <a href="index.php" class="active"><span>🏠</span> Home</a>
+        <a href="continentes.php"><span>🌎</span> Continentes</a>
+        <a href="paises.php"><span>🏳️</span> Países</a>
 
-        <a href="continentes.php">
-            <span>🌎</span>
-            Continentes
-        </a>
+        <!-- Exibe apenas para Administrador ('A') -->
+        <?php if (isset($_SESSION['usuario']['tipo']) && $_SESSION['usuario']['tipo'] === 'A'): ?>
+            <a href="cidades.php"><span>🏙️</span> Cidades</a>
+            <a href="governantes.php"><span>👤</span> Governantes</a>
+        <?php endif; ?>
 
-        <a href="paises.php" class="active">
-            <span>🏳️</span>
-            Países
-        </a>
-
-        <a href="cidades.php">
-            <span>🏙️</span>
-            Cidades
-        </a>
-
-        <a href="governantes.php">
-            <span>👤</span>
-            Governantes
-        </a>
-
+        <a href="logout.php"><span>🚪</span> Sair</a>
     </div>
-
 </nav>
 
 <div class="container">

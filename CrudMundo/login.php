@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $upd = $pdo->prepare("UPDATE tb_usuario SET qtd_acesso = qtd_acesso + 1 WHERE username = ?");
                 $upd->execute([$username]);
 
-                header("Location: index.html");
+                header("Location: index.php");
                 exit;
             } else {
                 $_SESSION['tentativas'][$username] = ($_SESSION['tentativas'][$username] ?? 0) + 1;
