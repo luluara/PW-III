@@ -41,11 +41,11 @@ require_once "conexao.php";
 <nav class="navbar">
     <div class="menu">
 
-        <a href="index.php" class="active">
+        <a href="index.php">
             <span>🏠</span> Home
         </a>
 
-        <a href="continentes.php">
+        <a href="continentes.php" class="active">
             <span>🌎</span> Continentes
         </a>
 

@@ -41,7 +41,7 @@ require_once "conexao.php";
 <nav class="navbar">
     <div class="menu">
 
-        <a href="index.php" class="active">
+        <a href="index.php">
             <span>🏠</span> Home
         </a>
 
@@ -60,7 +60,7 @@ require_once "conexao.php";
                 <span>🏙️</span> Cidades
             </a>
 
-            <a href="governantes.php">
+            <a href="governantes.php" class="active">
                 <span>👤</span> Governantes
             </a>
 

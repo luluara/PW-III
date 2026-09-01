@@ -41,7 +41,7 @@ require_once "conexao.php";
 <nav class="navbar">
     <div class="menu">
 
-        <a href="index.php" class="active">
+        <a href="index.php">
             <span>🏠</span> Home
         </a>
 
@@ -56,7 +56,7 @@ require_once "conexao.php";
         <!-- Exibe apenas para Administrador ('A') -->
         <?php if (isset($_SESSION['usuario']['tipo']) && $_SESSION['usuario']['tipo'] === 'A'): ?>
 
-            <a href="cidades.php">
+            <a href="cidades.php" class="active">
                 <span>🏙️</span> Cidades
             </a>
 
@@ -110,7 +110,6 @@ require_once "conexao.php";
                 while ($linha = $resultado->fetch(PDO::FETCH_ASSOC)) {
 
                 ?>
-
                     <option value="<?= $linha['id_pais']; ?>">
                         <?= htmlspecialchars($linha['nome']); ?>
                     </option>
