@@ -1,13 +1,23 @@
 <?php
 
-include("conexao.php");
+require_once "conexao.php";
 
-$id = $_GET['id'];
+$id = $_GET['id'] ?? null;
 
-$sql = "DELETE FROM tb_cidades WHERE id_cidade=$id";
+if (!$id) {
+    header("Location: cidades.php");
+    exit;
+}
 
-mysqli_query($con,$sql);
+$sql = "DELETE FROM tb_cidades WHERE id_cidade = :id";
+
+$stmt = $pdo->prepare($sql);
+$stmt->execute([
+    ':id' => $id
+]);
 
 header("Location: cidades.php");
+exit;
 
 ?>
+

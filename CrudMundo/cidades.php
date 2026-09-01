@@ -8,18 +8,27 @@ if (!isset($_SESSION['usuario'])) {
 }
 
 // 2. Impede o uso sem redefinir a senha no primeiro acesso
-if (isset($_SESSION['troca_obrigatoria']) || (isset($_SESSION['usuario']['qtd_acesso']) && $_SESSION['usuario']['qtd_acesso'] == 0)) {
+if (
+    isset($_SESSION['troca_obrigatoria']) ||
+    (isset($_SESSION['usuario']['qtd_acesso']) && $_SESSION['usuario']['qtd_acesso'] == 0)
+) {
     header("Location: trocar_senha.php");
     exit;
 }
+
+// 3. Conexão com o banco de dados
+require_once "conexao.php";
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <title>Sistema Mundo</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
 <header class="header">
@@ -31,187 +40,207 @@ if (isset($_SESSION['troca_obrigatoria']) || (isset($_SESSION['usuario']['qtd_ac
 
 <nav class="navbar">
     <div class="menu">
-        <a href="index.php" class="active"><span>🏠</span> Home</a>
-        <a href="continentes.php"><span>🌎</span> Continentes</a>
-        <a href="paises.php"><span>🏳️</span> Países</a>
+
+        <a href="index.php" class="active">
+            <span>🏠</span> Home
+        </a>
+
+        <a href="continentes.php">
+            <span>🌎</span> Continentes
+        </a>
+
+        <a href="paises.php">
+            <span>🏳️</span> Países
+        </a>
 
         <!-- Exibe apenas para Administrador ('A') -->
         <?php if (isset($_SESSION['usuario']['tipo']) && $_SESSION['usuario']['tipo'] === 'A'): ?>
-            <a href="cidades.php"><span>🏙️</span> Cidades</a>
-            <a href="governantes.php"><span>👤</span> Governantes</a>
+
+            <a href="cidades.php">
+                <span>🏙️</span> Cidades
+            </a>
+
+            <a href="governantes.php">
+                <span>👤</span> Governantes
+            </a>
+
         <?php endif; ?>
 
-        <a href="logout.php"><span>🚪</span> Sair</a>
+        <a href="logout.php">
+            <span>🚪</span> Sair
+        </a>
+
     </div>
 </nav>
 
 <div class="container">
 
-<div class="card">
+    <!-- FORMULÁRIO DE CADASTRO -->
+    <div class="card">
 
-<h2>Cadastrar Cidade</h2>
+        <h2>Cadastrar Cidade</h2>
 
-<form action="salvar_cidade.php" method="POST">
+        <form action="salvar_cidade.php" method="POST">
 
-<label>Nome</label>
-<input type="text" name="nome" required>
+            <label>Nome</label>
+            <input type="text" name="nome" required>
 
-<label>População</label>
-<input type="number" name="pop" required>
+            <label>População</label>
+            <input type="number" name="pop" required>
 
-<label>Área (km²)</label>
-<input type="number" name="area" required>
+            <label>Área (km²)</label>
+            <input type="number" name="area" required>
 
-<label>Clima</label>
-<input type="text" name="clima" required>
+            <label>Clima</label>
+            <input type="text" name="clima" required>
 
-<label>Data de Fundação</label>
-<input type="date" name="fundacao" required>
+            <label>Data de Fundação</label>
+            <input type="date" name="dt_fund" required>
 
-<label>País</label>
+            <label>País</label>
 
-<select name="id_pais">
+            <select name="id_pais" required>
 
-<?php
+                <?php
 
-$sql = "SELECT * FROM tb_paises";
-$resultado = mysqli_query($con,$sql);
+                $sql = "SELECT * FROM tb_paises";
 
-while($linha = mysqli_fetch_assoc($resultado))
-{
+                $resultado = $pdo->query($sql);
 
-?>
+                while ($linha = $resultado->fetch(PDO::FETCH_ASSOC)) {
 
-<option value="<?= $linha['id_pais']; ?>">
+                ?>
 
-<?= $linha['nome']; ?>
+                    <option value="<?= $linha['id_pais']; ?>">
+                        <?= htmlspecialchars($linha['nome']); ?>
+                    </option>
 
-</option>
+                <?php
+                }
+                ?>
 
-<?php
-}
-?>
+            </select>
 
-</select>
+            <br><br>
 
-<br><br>
+            <label>Governante</label>
 
-<label>Governante</label>
+            <select name="id_gov" required>
 
-<select name="id_gov">
+                <?php
 
-<?php
+                $sql = "SELECT * FROM tb_governantes";
 
-$sql = "SELECT * FROM tb_governantes";
-$resultado = mysqli_query($con,$sql);
+                $resultado = $pdo->query($sql);
 
-while($linha = mysqli_fetch_assoc($resultado))
-{
+                while ($linha = $resultado->fetch(PDO::FETCH_ASSOC)) {
 
-?>
+                ?>
 
-<option value="<?= $linha['id_gov']; ?>">
+                    <option value="<?= $linha['id_gov']; ?>">
+                        <?= htmlspecialchars($linha['nome']); ?>
+                    </option>
 
-<?= $linha['nome']; ?>
+                <?php
+                }
+                ?>
 
-</option>
+            </select>
 
-<?php
-}
-?>
+            <button type="submit">Salvar</button>
 
-</select>
+        </form>
 
+    </div>
 
-<button type="submit">Salvar</button>
+    <br>
 
-</form>
+    <!-- LISTA DE CIDADES -->
+    <div class="card">
 
-</div>
+        <h2>Cidades Cadastradas</h2>
 
-<br>
+        <table>
 
-<div class="card">
+            <tr>
+                <th>Nome</th>
+                <th>País</th>
+                <th>Governante</th>
+                <th>População</th>
+                <th>Ações</th>
+            </tr>
 
-<h2>Cidades Cadastradas</h2>
+            <?php
 
-<table>
+            $sql = "SELECT
+                        tb_cidades.*,
+                        tb_paises.nome AS pais,
+                        tb_governantes.nome AS governante
 
-<tr>
+                    FROM tb_cidades
 
-<th>Nome</th>
-<th>País</th>
-<th>Governante</th>
-<th>População</th>
-<th>Ações</th>
+                    INNER JOIN tb_paises
+                    ON tb_cidades.id_pais = tb_paises.id_pais
 
-</tr>
+                    INNER JOIN tb_governantes
+                    ON tb_cidades.id_gov = tb_governantes.id_gov";
 
-<?php
+            $resultado = $pdo->query($sql);
 
-$sql = "SELECT
-tb_cidades.*,
-tb_paises.nome AS pais,
-tb_governantes.nome AS governante
+            while ($dados = $resultado->fetch(PDO::FETCH_ASSOC)) {
 
-FROM tb_cidades
+            ?>
 
-INNER JOIN tb_paises
-ON tb_cidades.id_pais = tb_paises.id_pais
+                <tr>
 
-INNER JOIN tb_governantes
-ON tb_cidades.id_gov = tb_governantes.id_gov";
+                    <td>
+                        <?= htmlspecialchars($dados['nome']); ?>
+                    </td>
 
-$resultado = mysqli_query($con,$sql);
+                    <td>
+                        <?= htmlspecialchars($dados['pais']); ?>
+                    </td>
 
-while($dados = mysqli_fetch_assoc($resultado))
-{
+                    <td>
+                        <?= htmlspecialchars($dados['governante']); ?>
+                    </td>
 
-?>
+                    <td>
+                        <?= $dados['pop']; ?>
+                    </td>
 
-<tr>
+                    <td>
 
-<td><?= $dados['nome']; ?></td>
+                        <a
+                            class="btnEditar"
+                            href="editar_cidade.php?id=<?= $dados['id_cidade']; ?>"
+                        >
+                            Editar
+                        </a>
 
-<td><?= $dados['pais']; ?></td>
+                        <a
+                            class="btnExcluir"
+                            href="excluir_cidade.php?id=<?= $dados['id_cidade']; ?>"
+                            onclick="return confirm('Deseja excluir esta cidade?')"
+                        >
+                            Excluir
+                        </a>
 
-<td><?= $dados['governante']; ?></td>
+                    </td>
 
-<td><?= $dados['pop']; ?></td>
+                </tr>
 
-<td>
+            <?php
+            }
+            ?>
 
-<a class="btnEditar"
-href="editar_cidade.php?id=<?= $dados['id_cidade']; ?>">
+        </table>
 
-Editar
-
-</a>
-
-<a class="btnExcluir"
-onclick="return confirm('Deseja excluir esta cidade?')"
-href="excluir_cidade.php?id=<?= $dados['id_cidade']; ?>">
-
-Excluir
-
-</a>
-
-</td>
-
-</tr>
-
-<?php
-
-}
-
-?>
-
-</table>
-
-</div>
+    </div>
 
 </div>
 
 </body>
 
 </html>
+

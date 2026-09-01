@@ -8,18 +8,26 @@ if (!isset($_SESSION['usuario'])) {
 }
 
 // 2. Impede o uso sem redefinir a senha no primeiro acesso
-if (isset($_SESSION['troca_obrigatoria']) || (isset($_SESSION['usuario']['qtd_acesso']) && $_SESSION['usuario']['qtd_acesso'] == 0)) {
+if (
+    isset($_SESSION['troca_obrigatoria']) ||
+    (isset($_SESSION['usuario']['qtd_acesso']) && $_SESSION['usuario']['qtd_acesso'] == 0)
+) {
     header("Location: trocar_senha.php");
     exit;
 }
+
+require_once "conexao.php";
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <title>Sistema Mundo</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
 <header class="header">
@@ -31,185 +39,202 @@ if (isset($_SESSION['troca_obrigatoria']) || (isset($_SESSION['usuario']['qtd_ac
 
 <nav class="navbar">
     <div class="menu">
-        <a href="index.php" class="active"><span>🏠</span> Home</a>
-        <a href="continentes.php"><span>🌎</span> Continentes</a>
-        <a href="paises.php"><span>🏳️</span> Países</a>
+
+        <a href="index.php" class="active">
+            <span>🏠</span> Home
+        </a>
+
+        <a href="continentes.php">
+            <span>🌎</span> Continentes
+        </a>
+
+        <a href="paises.php">
+            <span>🏳️</span> Países
+        </a>
 
         <!-- Exibe apenas para Administrador ('A') -->
         <?php if (isset($_SESSION['usuario']['tipo']) && $_SESSION['usuario']['tipo'] === 'A'): ?>
-            <a href="cidades.php"><span>🏙️</span> Cidades</a>
-            <a href="governantes.php"><span>👤</span> Governantes</a>
+
+            <a href="cidades.php">
+                <span>🏙️</span> Cidades
+            </a>
+
+            <a href="governantes.php">
+                <span>👤</span> Governantes
+            </a>
+
         <?php endif; ?>
 
-        <a href="logout.php"><span>🚪</span> Sair</a>
+        <a href="logout.php">
+            <span>🚪</span> Sair
+        </a>
+
     </div>
 </nav>
 
 <div class="container">
 
-<div class="card">
+    <div class="card">
 
-<h2>Cadastrar País</h2>
+        <h2>Cadastrar País</h2>
 
-<form action="salvar_pais.php" method="POST">
+        <form action="salvar_pais.php" method="POST">
 
-<label>Nome</label>
-<input type="text" name="nome" required>
+            <label>Nome</label>
+            <input type="text" name="nome" required>
 
-<label>População</label>
-<input type="number" name="pop" required>
+            <label>População</label>
+            <input type="number" name="pop" required>
 
-<label>Área</label>
-<input type="number" name="area" required>
+            <label>Área</label>
+            <input type="number" name="area" required>
 
-<label>Idioma</label>
-<input type="text" name="idioma" required>
+            <label>Idioma</label>
+            <input type="text" name="idioma" required>
 
-<label>Clima</label>
-<input type="text" name="clima" required>
+            <label>Clima</label>
+            <input type="text" name="clima" required>
 
-<label>Regime Político</label>
-<input type="text" name="reg_pol" required>
-<br><br>
+            <label>Regime Político</label>
+            <input type="text" name="reg_pol" required>
 
-<label>Moeda</label>
-<input type="text" name="moeda" required>
+            <br><br>
 
-<label>Continente</label>
+            <label>Moeda</label>
+            <input type="text" name="moeda" required>
 
-<select name="id_continente">
+            <label>Continente</label>
 
-<?php
+            <select name="id_continente" required>
 
-$sql="SELECT * FROM tb_continentes";
-$resultado=mysqli_query($con,$sql);
+                <?php
 
-while($linha=mysqli_fetch_assoc($resultado))
-{
-?>
+                $sql = "SELECT * FROM tb_continentes ORDER BY nome";
+                $resultado = $pdo->query($sql);
 
-<option value="<?php echo $linha['id_continente']; ?>">
+                while ($linha = $resultado->fetch(PDO::FETCH_ASSOC)) {
+                ?>
 
-<?php echo $linha['nome']; ?>
+                    <option value="<?= $linha['id_continente']; ?>">
+                        <?= htmlspecialchars($linha['nome']); ?>
+                    </option>
 
-</option>
+                <?php
+                }
+                ?>
 
-<?php
-}
-?>
+            </select>
 
-</select>
+            <label>Governante</label>
 
-<label>Governante</label>
+            <select name="id_gov" required>
 
-<select name="id_gov" required>
+                <?php
 
-<?php
+                $sql = "SELECT * FROM tb_governantes ORDER BY nome";
+                $resultado = $pdo->query($sql);
 
-$sql = "SELECT * FROM tb_governantes";
-$resultado = mysqli_query($con, $sql);
+                while ($linha = $resultado->fetch(PDO::FETCH_ASSOC)) {
+                ?>
 
-while($linha = mysqli_fetch_assoc($resultado)){
-?>
+                    <option value="<?= $linha['id_gov']; ?>">
+                        <?= htmlspecialchars($linha['nome']); ?>
+                    </option>
 
-<option value="<?php echo $linha['id_gov']; ?>">
-    <?php echo $linha['nome']; ?>
-</option>
+                <?php
+                }
+                ?>
 
-<?php
-}
-?>
+            </select>
 
-<?php
+            <button type="submit">Salvar</button>
 
-?>
+        </form>
 
-</select>
+    </div>
 
-<button type="submit">Salvar</button>
+    <br>
 
-</form>
+    <div class="card">
 
-</div>
+        <h2>Países cadastrados</h2>
 
-<br>
+        <table>
 
-<div class="card">
+            <tr>
+                <th>Nome</th>
+                <th>Continente</th>
+                <th>Idioma</th>
+                <th>Governante</th>
+                <th>Ações</th>
+            </tr>
 
-<h2>Países cadastrados</h2>
+            <?php
 
-<table>
+            $sql = "SELECT
+                        tb_paises.*,
+                        tb_continentes.nome AS continente,
+                        tb_governantes.nome AS governante
 
-<tr>
+                    FROM tb_paises
 
-<th>Nome</th>
-<th>Continente</th>
-<th>Idioma</th>
-<th>Governante</th>
-<th>Ações</th>
+                    INNER JOIN tb_continentes
+                        ON tb_paises.id_continente = tb_continentes.id_continente
 
-</tr>
+                    INNER JOIN tb_governantes
+                        ON tb_paises.id_gov = tb_governantes.id_gov
 
-<?php
+                    ORDER BY tb_paises.nome";
 
-$sql="SELECT
-tb_paises.*,
-tb_continentes.nome AS continente,
-tb_governantes.nome AS governante
+            $resultado = $pdo->query($sql);
 
-FROM tb_paises
+            while ($dados = $resultado->fetch(PDO::FETCH_ASSOC)) {
+            ?>
 
-INNER JOIN tb_continentes
-ON tb_paises.id_continente=tb_continentes.id_continente
+                <tr>
 
-INNER JOIN tb_governantes
-ON tb_paises.id_gov=tb_governantes.id_gov";
+                    <td>
+                        <?= htmlspecialchars($dados['nome']); ?>
+                    </td>
 
-$resultado=mysqli_query($con,$sql);
+                    <td>
+                        <?= htmlspecialchars($dados['continente']); ?>
+                    </td>
 
-while($dados=mysqli_fetch_assoc($resultado))
-{
+                    <td>
+                        <?= htmlspecialchars($dados['idioma']); ?>
+                    </td>
 
-?>
+                    <td>
+                        <?= htmlspecialchars($dados['governante']); ?>
+                    </td>
 
-<tr>
+                    <td>
 
-<td><?php echo $dados['nome']; ?></td>
+                        <a class="btnEditar"
+                           href="editar_pais.php?id=<?= $dados['id_pais']; ?>">
+                            Editar
+                        </a>
 
-<td><?php echo $dados['continente']; ?></td>
+                        <a class="btnExcluir"
+                           onclick="return confirm('Deseja excluir?')"
+                           href="excluir_pais.php?id=<?= $dados['id_pais']; ?>">
+                            Excluir
+                        </a>
 
-<td><?php echo $dados['idioma']; ?></td>
+                    </td>
 
-<td><?php echo $dados['governante']; ?></td>
+                </tr>
 
-<td>
+            <?php
+            }
+            ?>
 
-<a class="btnEditar" href="editar_pais.php?id=<?php echo $dados['id_pais']; ?>">Editar</a>
+        </table>
 
-<a class="btnExcluir"
-onclick="return confirm('Deseja excluir?')"
-href="excluir_pais.php?id=<?php echo $dados['id_pais']; ?>">
-
-Excluir
-
-</a>
-
-</td>
-
-</tr>
-
-<?php
-
-}
-
-?>
-
-</table>
-
-</div>
+    </div>
 
 </div>
 
 </body>
-
 </html>
