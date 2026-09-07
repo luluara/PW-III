@@ -709,3 +709,72 @@ select:focus {
         display: none;
     }
 }
+
+/* =========================
+   LOGIN
+   ========================= */
+
+.login-box {
+    width: 560px;
+    max-width: calc(100% - 40px);
+    margin: 42px auto;
+    box-sizing: border-box;
+}
+
+.login-box h2 {
+    margin-bottom: 28px;
+}
+
+.login-form-box {
+    background-color: #f4f9fd;
+    border: 1px solid #cfe3f2;
+    border-radius: 12px;
+    padding: 28px;
+    box-sizing: border-box;
+}
+
+.login-form-box .form-group {
+    margin-bottom: 20px;
+}
+
+.login-form-box .form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    font-size: 16px;
+    color: #075985;
+}
+
+.login-form-box input {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.login-forgot {
+    text-align: center;
+    margin: 28px 0 22px;
+}
+
+.esqueci-senha {
+    color: #0000ee;
+    font-size: 16px;
+    text-decoration: underline;
+}
+
+.login-form-box .btn-submit {
+    width: 100%;
+    margin-top: 0;
+    padding: 13px;
+    font-size: 16px;
+}
+
+.alert-error {
+    background-color: #fff0f1;
+    color: #ad303b;
+    border: 1px solid #edb6ba;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 15px;
+}

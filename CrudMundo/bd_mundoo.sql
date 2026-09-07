@@ -553,21 +553,21 @@ references tb_usuario (username)
 
 
 -- Usuário Administrador (Senha inicial: 123456)
-INSERT INTO tb_usuario (username, password, nome, qtd_acesso, status, tipo) 
-VALUES ('admin@email.com', '123456', 'Administrador do Sistema', 0, 'A','A'),
-  ('user@email.com', '123456', 'Comum', 0, 'A','U');
+INSERT INTO tb_usuario (username, password, nome, qtd_acesso, status, tipo) VALUES 
+('admin@email.com', '123456', 'Administrador do Sistema', 0, 'A','A'),
+('user@email.com', '123456', 'Comum', 0, 'A','U');
 
 -- Registro de tentativa de login bem-sucedida
 INSERT INTO tb_logs (descricao, data_log, username) 
 VALUES ('Login realizado com sucesso', CURDATE(), 'admin@email.com');
 
 -- Registro de falha de senha
-INSERT INTO tb_logs (descricao, data_log, username) 
-VALUES ('Tentativa incorreta de senha (1/3)', CURDATE(), 'user@email.com');
+INSERT INTO tb_logs (descricao, data_log, username) VALUES 
+('Tentativa incorreta de senha (1/3)', CURDATE(), 'user@email.com');
 
 -- Registro de conta bloqueada
-INSERT INTO tb_logs (descricao, data_log, username) 
-VALUES ('Bloqueio de conta por exceder 3 tentativas incorretas', CURDATE(), 'user@email.com');
+INSERT INTO tb_logs (descricao, data_log, username) VALUES 
+('Bloqueio de conta por exceder 3 tentativas incorretas', CURDATE(), 'user@email.com');
 
 UPDATE tb_usuario 
 SET status = 'A', qtd_acesso = 1 
@@ -579,3 +579,4 @@ WHERE username = 'user@email.com';
 
 UPDATE tb_usuario SET qtd_acesso = 0 WHERE username = 'admin@email.com';
 UPDATE tb_usuario SET qtd_acesso = 0 WHERE username = 'user@email.com';
+
