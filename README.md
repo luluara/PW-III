@@ -22,7 +22,7 @@ O CRUD Mundo é uma aplicação desenvolvida para o gerenciamento de informaçõ
 | Front-end | HTML, CSS, JavaScript |
 | Back-end | PHP |
 | Banco de Dados | MySQL |
-| Controle de Versão | Git e GitHub |
+| Controle de Versão | GitHub |
 
 ## Estrutura do projeto
 
