@@ -18,6 +18,7 @@ O CRUD Mundo é uma aplicação desenvolvida para o gerenciamento de informaçõ
 ## Tecnologias utilizadas
 
 | Camada | Tecnologia |
+|--------|------------|
 | Front-end | HTML, CSS, JavaScript |
 | Back-end | PHP |
 | Banco de Dados | MySQL |
