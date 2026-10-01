@@ -42,7 +42,7 @@ Os principais arquivos do projeto são:
 - `trocar_senha.php` — alteração de senha.
 - `alterar_senha.php` — alteração da senha do usuário.
 - `gerar_hash.php` — geração de senha criptografada.
-- `estilo.css` — estilos visuais do sistema.
+- `style.css` — estilos visuais do sistema.
 
 
 ## Como executar
