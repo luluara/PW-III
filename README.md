@@ -2,18 +2,19 @@
 
 ## Sobre o projeto
 
-O CRUD Mundo é uma aplicação desenvolvida para o gerenciamento de informações relacionadas a países, cidades, continentes e governantes. O sistema permite realizar operações de cadastro, consulta, alteração e exclusão dos registros, facilitando a organização e o gerenciamento das informações.
+O CRUD Mundo é um sistema web desenvolvido para realizar o gerenciamento de informações relacionadas a países, cidades, continentes e governantes. O projeto permite cadastrar, consultar, alterar e excluir informações, além de possuir um sistema de login com diferentes níveis de acesso para os usuários.
 
 ## Funcionalidades
 
-* Cadastro de continentes
-* Cadastro de países
-* Cadastro de cidades
-* Cadastro de governantes
-* Consulta de registros
-* Alteração de informações cadastradas
-* Exclusão de registros
-* Sistema de login e nível hierárquico de usuários
+- Cadastro, consulta, alteração e exclusão de países.
+- Cadastro, consulta, alteração e exclusão de cidades.
+- Cadastro, consulta, alteração e exclusão de continentes.
+- Cadastro, consulta, alteração e exclusão de governantes.
+- Sistema de login.
+- Controle de usuários por nível hierárquico.
+- Alteração de senha.
+- Recuperação de senha.
+- Banco de dados integrado ao sistema.
 
 ## Tecnologias utilizadas
 
@@ -25,6 +26,23 @@ O CRUD Mundo é uma aplicação desenvolvida para o gerenciamento de informaçõ
 | Controle de Versão | GitHub |
 
 ## Estrutura do projeto
+
+Os principais arquivos do projeto são:
+
+- `index.php` — página inicial do sistema.
+- `login.php` — tela de login.
+- `logout.php` — encerra a sessão do usuário.
+- `bd_mundo.sql` — arquivo para criação e configuração do banco de dados.
+- `paises.php` — gerenciamento de países.
+- `cidades.php` — gerenciamento de cidades.
+- `continentes.php` — gerenciamento de continentes.
+- `governantes.php` — gerenciamento de governantes.
+- `esquecido_senha.php` — recuperação de senha.
+- `redefinir_senha.php` — redefinição de senha.
+- `trocar_senha.php` — alteração de senha.
+- `alterar_senha.php` — alteração da senha do usuário.
+- `gerar_hash.php` — geração de senha criptografada.
+- `estilo.css` — estilos visuais do sistema.
 
 
 ## Como executar
