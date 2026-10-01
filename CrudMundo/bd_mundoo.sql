@@ -580,3 +580,11 @@ WHERE username = 'user@email.com';
 UPDATE tb_usuario SET qtd_acesso = 0 WHERE username = 'admin@email.com';
 UPDATE tb_usuario SET qtd_acesso = 0 WHERE username = 'user@email.com';
 
+UPDATE tb_usuario
+SET password = '$2y$10$0xZ6Suddpm6Yhd2p0ZjSVetYB96cGbCfkvk92RJf.u9lgBxSfXQ2G'
+WHERE username = 'admin@email.com';
+
+UPDATE tb_usuario
+SET password = '$2y$10$0xZ6Suddpm6Yhd2p0ZjSVetYB96cGbCfkvk92RJf.u9lgBxSfXQ2G'
+WHERE username = 'user@email.com';
+
