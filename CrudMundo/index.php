@@ -7,8 +7,11 @@ if (!isset($_SESSION['usuario'])) {
     exit;
 }
 
-// 2. Impede o uso sem redefinir a senha no primeiro acesso
-if (isset($_SESSION['troca_obrigatoria']) || (isset($_SESSION['usuario']['qtd_acesso']) && $_SESSION['usuario']['qtd_acesso'] == 0)) {
+// Impede acesso enquanto a senha inicial não foi alterada
+if (
+    isset($_SESSION['usuario']['qtd_acesso']) &&
+    (int)$_SESSION['usuario']['qtd_acesso'] === 0
+) {
     header("Location: trocar_senha.php");
     exit;
 }

@@ -1,4 +1,3 @@
-```php
 <?php
 
 session_start();
@@ -10,11 +9,10 @@ $erro = "";
 // Verifica se o formulário foi enviado
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
-    // Pega os dados digitados
     $username = trim($_POST["username"]);
     $senha = $_POST["senha"];
 
-    // Procura o usuário no banco
+    // Procura o usuário pelo e-mail
     $sql = "SELECT * FROM tb_usuario WHERE username = ?";
 
     $stmt = $pdo->prepare($sql);
@@ -22,41 +20,51 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    // Verifica usuário e senha
-    if ($usuario && password_verify($senha, $usuario["password"])) {
-
-        // Verifica se o usuário está bloqueado
-        if ($usuario["status"] === "B") {
-
-            $erro = "Seu usuário está bloqueado.";
-
-        } else {
-
-            // Cria as informações da sessão
-            $_SESSION["usuario_id"] = $usuario["id_usuario"];
-            $_SESSION["usuario"] = $usuario["username"];
-            $_SESSION["nome"] = $usuario["nome"];
-            $_SESSION["tipo"] = $usuario["tipo"];
-
-            // Verifica se é primeiro acesso
-            if (
-                isset($usuario["troca_obrigatoria"]) &&
-                $usuario["troca_obrigatoria"] == 1
-            ) {
-
-                header("Location: trocar_senha.php");
-                exit;
-            }
-
-            // Login realizado
-            header("Location: index.php");
-            exit;
-        }
-
-    } else {
+    // Verifica se o usuário existe
+    if (!$usuario) {
 
         $erro = "E-mail ou senha incorretos.";
 
+    } else {
+
+        // Verifica a senha
+        if (!password_verify($senha, $usuario["password"])) {
+
+            $erro = "E-mail ou senha incorretos.";
+
+        } else {
+
+            // Verifica se o usuário está bloqueado
+            if ($usuario["status"] === "B") {
+
+                $erro = "Seu usuário está bloqueado.";
+
+            } else {
+
+                // =====================================================
+                // SALVA O USUÁRIO INTEIRO NA SESSÃO
+                // =====================================================
+                $_SESSION["usuario"] = $usuario;
+
+                // Verifica se é o primeiro acesso
+if (
+    isset($usuario["qtd_acesso"]) &&
+    (int)$usuario["qtd_acesso"] === 0
+) {
+
+    $_SESSION["troca_obrigatoria"] = true;
+
+    header("Location: trocar_senha.php");
+    exit;
+}
+
+// Se não for primeiro acesso
+unset($_SESSION["troca_obrigatoria"]);
+
+header("Location: index.php");
+exit;
+            }
+        }
     }
 }
 
@@ -79,73 +87,81 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 <body>
 
-    <header>
+<header class="header">
+
+    <div>
+
         <h1>Sistema Mundo</h1>
-    </header>
 
-    <main class="container login-box">
+        <p>Explore o mundo, um país de cada vez</p>
 
-        <h2>🔒 Acesso ao Sistema</h2>
+    </div>
 
-        <?php if (!empty($erro)): ?>
+</header>
 
-            <div class="alert-error">
-                ⚠️ <?= htmlspecialchars($erro) ?>
-            </div>
+<main class="container login-box">
 
-        <?php endif; ?>
+    <h2>🔒 Acesso ao Sistema</h2>
 
-        <form method="POST">
+    <?php if (!empty($erro)): ?>
 
-            <div class="form-group">
+        <div class="alert-error">
+            ⚠️ <?= htmlspecialchars($erro) ?>
+        </div>
 
-                <label for="username">
-                    E-mail (Usuário):
-                </label>
+    <?php endif; ?>
 
-                <input
-                    type="email"
-                    id="username"
-                    name="username"
-                    placeholder="seuemail@exemplo.com"
-                    required
-                >
+    <form method="POST">
 
-            </div>
+        <div class="form-group">
 
-            <div class="form-group">
+            <label for="username">
+                E-mail (Usuário):
+            </label>
 
-                <label for="senha">
-                    Senha:
-                </label>
+            <input
+                type="email"
+                id="username"
+                name="username"
+                placeholder="seuemail@exemplo.com"
+                required
+            >
 
-                <input
-                    type="password"
-                    id="senha"
-                    name="senha"
-                    placeholder="Digite sua senha"
-                    required
-                >
+        </div>
 
-            </div>
+        <div class="form-group">
 
-            <div class="login-forgot">
+            <label for="senha">
+                Senha:
+            </label>
 
-                <a href="esqueci_senha.php" class="esqueci-senha">
-                    Esqueci minha senha
-                </a>
+            <input
+                type="password"
+                id="senha"
+                name="senha"
+                placeholder="Digite sua senha"
+                required
+            >
 
-            </div>
+        </div>
 
-            <button type="submit" class="btn-submit">
-                Entrar no Sistema
-            </button>
+        <div class="login-forgot">
 
-        </form>
+            <a href="esqueci_senha.php" class="esqueci-senha">
+                Esqueci minha senha
+            </a>
 
-    </main>
+        </div>
+
+        <button type="submit" class="btn-submit">
+            Entrar no Sistema
+        </button>
+
+    </form>
+
+</main>
 
 </body>
 
 </html>
-```
+
